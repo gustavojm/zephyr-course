@@ -9,6 +9,15 @@
         };            
     };
 
+	gpio_keys {
+		compatible = "gpio-keys";
+
+		user_button: button_0 {
+			gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+			label = "User SB1";
+			// zephyr,code = <INPUT_KEY_0>;
+		};
+	};
     
     aliases {
         status-led = &led_red; 
