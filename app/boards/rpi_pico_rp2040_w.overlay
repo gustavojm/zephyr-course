@@ -3,7 +3,9 @@
         compatible = "gpio-leds";
         
         led_red: led_red {
-            gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+            // gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;         // Ref by gpio label
+            // gpios = <&pico_header 9 GPIO_ACTIVE_HIGH>;   // Ref by connector label
+            gpios = <&{/connector} 9 GPIO_ACTIVE_HIGH>;     // Ref by path
         };            
     };
 
