@@ -1,30 +1,27 @@
-#include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
+#include <zephyr/usb/usb_device.h>
+#include <zephyr/drivers/uart.h>
 #include <zephyr/logging/log.h>
 
-#define SLEEP_TIME_MS 250
-
-/* The devicetree node identifier for the "led0" alias. */
-#define LED_NODE DT_ALIAS(status_led)
-
-static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
-
-LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
+LOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);
 
 int main(void)
 {
-    bool led_state = true;
+    const struct device *dev = DEVICE_DT_GET(DT_CHOSEN(zephyr_console));
+    uint32_t dtr = 0;
 
-    if (!gpio_is_ready_dt(&led)) return 0;
-
-    if (gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE) < 0) return 0;
-
-    while (1) {
-        if (gpio_pin_toggle_dt(&led) < 0) return 0;
-
-        led_state = !led_state;
-        LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
-        k_msleep(SLEEP_TIME_MS);
+    if (usb_enable(NULL) != 0) {
+        return -1;
     }
+
+    /* Wait for a DTR signal (terminal connected) */
+    while (!dtr) {
+        uart_line_ctrl_get(dev, UART_LINE_CTRL_DTR, &dtr);
+        k_sleep(K_MSEC(100));
+    }
+
+    LOG_INF("USB CDC ACM shell/log ready!");
+    LOG_DBG("Debug logging active on ttyACM0");
+
     return 0;
 }
