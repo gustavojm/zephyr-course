@@ -31,11 +31,11 @@ int main(void)
     LOG_INF("USB CDC ACM shell/log ready!");
     LOG_DBG("Debug logging active on ttyACM0");
 
-    if (!gpio_is_ready_dt(&status_led)) {
+    if (!gpio_is_ready_dt(&status_led)) {        
         return 0;
     }
 
-    if (!gpio_is_ready_dt(&config_btn)) {
+    if (!gpio_is_ready_dt(&config_btn)) {        
         return 0;
     }
 
@@ -49,9 +49,9 @@ int main(void)
 
         bool btn_pressed = gpio_pin_get_dt(&config_btn);
         if (btn_pressed) {
-            gpio_pin_set_dt(&status_led, 1);
+            gpio_pin_set_dt(&status_led, 1);            
         } else {
-            gpio_pin_set_dt(&status_led, 0);
+            gpio_pin_set_dt(&status_led, 0);                        
         }
         // if (gpio_pin_toggle_dt(&status_led) < 0) return 0;
 

@@ -57,6 +57,9 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "C_Cpp.default.compileCommands": [
-        "build/compile_commands.json"
-    ]
+    "build/compile_commands.json"
+  ],
+  "cmake.configureOnOpen": false,
+  "C_Cpp.default.compilerPath": "${userHome}/zephyr-sdk-0.17.2/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc",
+  "files.associations": {}
 }

@@ -1,24 +1,48 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/gustavo/zephyr/iomico/zephyr-course/app/src",
-      "program": "/home/gustavo/zephyr/iomico/zephyr-course/app/src/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
+    "version": "0.2.0",
+    "configurations": [
         {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
-    }
-  ]
+            "name": "Launch",
+            "device": "nRF52840_xxAA",
+            "cwd": "${workspaceFolder}",
+            "executable": "build/zephyr/zephyr.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
+            "configFiles": [
+              "interface/cmsis-dap.cfg", 
+              "${userHome}/zephyrproject/zephyr/boards/raspberrypi/rpi_pico/support/openocd.cfg"
+            ],
+            "openOCDLaunchCommands": [
+              "transport select swd",
+              "adapter speed 2000",
+              "source [find target/rp2040.cfg]"
+            ],            
+            "showDevDebugOutput": "raw",
+            "gdbPath": "${userHome}/zephyr-sdk-0.17.2/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb",
+            "preLaunchTask": "West Build"
+        },
+        {
+            "name": "Attach",
+            "device": "nRF52840_xxAA",
+            "cwd": "${workspaceFolder}",
+            "executable": "build/zephyr/zephyr.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",            
+            "configFiles": [
+              "interface/cmsis-dap.cfg", 
+              "${userHome}/zephyrproject/zephyr/boards/raspberrypi/rpi_pico/support/openocd.cfg"
+            ],
+             "openOCDLaunchCommands": [              
+              "transport select swd",
+              "adapter speed 2000",
+              "source [find target/rp2040.cfg]"
+            ],            
+            "showDevDebugOutput": "raw",
+           "gdbPath": "${userHome}/zephyr-sdk-0.17.2/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb"
+        },
+    ]
 }
