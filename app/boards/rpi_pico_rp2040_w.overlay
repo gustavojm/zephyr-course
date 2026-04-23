@@ -1,13 +1,15 @@
 / {
     leds {
         compatible = "gpio-leds";
-   		led0: led_0 {
-        	gpios = <&pico_header 9 GPIO_ACTIVE_HIGH>;
-			label = "LED";
-        };
+        
+        led_red: led_red {
+            // gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>;         // Ref by gpio label
+            // gpios = <&pico_header 9 GPIO_ACTIVE_HIGH>;   // Ref by connector label
+            gpios = <&{/connector} 9 GPIO_ACTIVE_HIGH>;     // Ref by path
+        };            
     };
 
     aliases {
-        led0 = &led0;  
+        status-led = &led_red; 
     };
 };
