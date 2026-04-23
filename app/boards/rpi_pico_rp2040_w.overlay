@@ -22,7 +22,8 @@
 	};
     
     aliases {
-        status-led = &led_red; 
+        status-led = &led_red;
+        sw0 = &user_button; 
     };
 
     chosen {

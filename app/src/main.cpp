@@ -7,9 +7,11 @@
 LOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);
 
 #define LED_NODE DT_ALIAS(status_led)
+#define SW0_NODE DT_ALIAS(sw0)
 #define SLEEP_TIME_MS 2500
 
 static const struct gpio_dt_spec status_led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
+static const struct gpio_dt_spec config_btn = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
 
 int main(void)
 {
@@ -33,15 +35,26 @@ int main(void)
         return 0;
     }
 
+    if (!gpio_is_ready_dt(&config_btn)) {
+        return 0;
+    }
+
     if (gpio_pin_configure_dt(&status_led, GPIO_OUTPUT_ACTIVE) < 0) return 0;
+    if (gpio_pin_configure_dt(&config_btn, GPIO_INPUT | GPIO_PULL_UP) < 0) return 0;
 
     bool led_state = false;
 
     while (1) {
-        if (gpio_pin_toggle_dt(&status_led) < 0) return 0;
+        bool btn_pressed = gpio_pin_get_dt(&config_btn);
+        if (btn_pressed) {
+            gpio_pin_set_dt(&status_led, 1);
+        } else {
+            gpio_pin_set_dt(&status_led, 1);
+        }
+        // if (gpio_pin_toggle_dt(&status_led) < 0) return 0;
 
-        led_state = !led_state;
-        LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
+        // led_state = !led_state;
+        // LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
         k_msleep(SLEEP_TIME_MS);
     }
     return 0;
