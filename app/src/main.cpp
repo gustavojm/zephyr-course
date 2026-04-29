@@ -10,8 +10,26 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);
 #define SW0_NODE DT_ALIAS(sw0)
 #define SLEEP_TIME_MS 100
 
+#define BLINK_THREAD_STACK_SIZE 256
+
+K_THREAD_STACK_DEFINE(blink_thread_stack, BLINK_THREAD_STACK_SIZE);
+
 static const struct gpio_dt_spec status_led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 static const struct gpio_dt_spec config_btn = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
+
+static struct k_thread blink_thread;
+
+void blink_thread_fn(void *par1, void *par2, void *par3) {
+    static bool status = false;
+    
+    struct gpio_dt_spec *status_led_local = (struct gpio_dt_spec *)par1;
+
+    while(1) {
+        status = !status;
+        gpio_pin_set_dt(status_led_local, status);
+        k_sleep(K_MSEC(1000));
+    }        
+}
 
 int main(void)
 {
@@ -25,7 +43,7 @@ int main(void)
     /* Wait for a DTR signal (terminal connected) */
     while (!dtr) {
         uart_line_ctrl_get(dev, UART_LINE_CTRL_DTR, &dtr);
-        k_sleep(K_MSEC(100));
+        k_sleep(K_MSEC(1000));
     }
 
     LOG_INF("USB CDC ACM shell/log ready!");
@@ -43,6 +61,8 @@ int main(void)
     if (gpio_pin_configure_dt(&config_btn, GPIO_INPUT | GPIO_PULL_UP) < 0) return 0;
 
     bool led_state = false;
+
+    k_thread_create(&blink_thread, blink_thread_stack, K_THREAD_STACK_SIZEOF(blink_thread_stack), blink_thread_fn, (void *)&status_led, NULL, NULL, 7, 0, K_NO_WAIT);
 
     while (1) {
         static bool old_btn_pressed = false;
