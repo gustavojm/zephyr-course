@@ -63,6 +63,7 @@ int main(void)
     bool led_state = false;
 
     k_thread_create(&blink_thread, blink_thread_stack, K_THREAD_STACK_SIZEOF(blink_thread_stack), blink_thread_fn, (void *)&status_led, NULL, NULL, 7, 0, K_NO_WAIT);
+    strncpy(blink_thread.name, "blink_led", sizeof(blink_thread.name));    
 
     while (1) {
         static bool old_btn_pressed = false;
