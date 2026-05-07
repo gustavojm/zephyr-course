@@ -10,7 +10,8 @@
 
 // static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
-static const struct device *our_driver = DEVICE_DT_GET(DT_NODELABEL(our_driver0));
+static const struct device *our_driver0 = DEVICE_DT_GET(DT_NODELABEL(our_driver0));
+static const struct device *our_driver1 = DEVICE_DT_GET(DT_NODELABEL(our_driver1));
 
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
@@ -25,9 +26,14 @@ int main(void)
     // if (gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE) < 0) return 0;
 
     while (1) {
-    auto ret = sensor_channel_get(our_driver, SENSOR_CHAN_AMBIENT_TEMP,  &val);
+    auto ret = sensor_channel_get(our_driver0, SENSOR_CHAN_AMBIENT_TEMP,  &val);
 
-    printk("sensor read from main %i", ret);
+    printk("sensor read from main %i \n", ret);
+
+    ret = sensor_channel_get(our_driver1, SENSOR_CHAN_ALTITUDE,  &val);
+
+    printk("sensor read from main sensor_1 %i \n", ret);
+
   //     if (gpio_pin_toggle_dt(&led) < 0) return 0;
 
     //     led_state = !led_state;
