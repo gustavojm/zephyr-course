@@ -1,0 +1,66 @@
+Create dts/bindingso
+crete our,driver.yaml
+
+------
+description: Our simple GPIO driver
+compatible: "our, driver"
+include: base.yaml  # for status property
+------
+
+
+create an app.overlay to define a DTS node using this compatible
+
+/ {
+    our_driver0: our_driver {
+        compatible = "our,driver";
+        status = "okay";
+    };
+};
+
+Create a Kconfig file in drivers/our_driver directory
+
+menuconfig OUR_DRIVER
+bool "Our custom driver"
+default y
+depends on DT_HAS_OUR_DRIVER_ENABLED # compile it only if present in DT
+
+
+Remember to source or rsource the newly generated Kconfig from the Kconfig in the app directory
+
+rsource "drivers/our_driver/Kconfig"
+
+
+create an CMakeLists.txt in drivers/our_driver directory
+
+if (CONFIG_OUR_DRIVER)
+  target_sources(app PRIVATE our_driver.c)
+endif()
+
+
+Flow
+one or more nodes declared in DTS with compatible = "our,driver"
+Kconfig is enabled because DT_HAS_OUR_DRIVER_ENABLED is defined thus 
+Kconfig defaults OUR_DRIVER=y
+our_driver.c is compiled
+
+Remember to source or rsource the newly generated Kconfig from the Kconfig in the app directory
+
+rsource "drivers/our_driver/Kconfig"
+
+
+Troubleshooting 
+build/zephyr/zephyr.dts search for a node with the compatible = "our,driver"
+
+build/Kconfig/Kconfig.dts search for 
+config DT_HAS_OUR_DRIVER_ENABLED
+	def_bool $(dt_compat_enabled,$(DT_COMPAT_OUR_DRIVER))
+
+if it's not there means that zephyr is not finding the our,driver.yaml file or that there is somethin wrong in it
+
+build/zephyr/include/generated/zephyr/devicetree_generated.h look for our_driver
+
+build/compile_commands.json search for our_driver.c to see if it's being compiled, if it's not
+maybe the CMakeLists on the root is not adding the driver's directory
+
+verify that add_subdirectory(drivers/our_driver)
+
