@@ -26,6 +26,10 @@ int main(void) {
   // if (gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE) < 0) return 0;
 
   while (1) {
+    if (!device_is_ready(our_driver0)) {
+      return 0;
+    }
+
     auto ret = sensor_channel_get(our_driver0, SENSOR_CHAN_AMBIENT_TEMP, &val);
 
     printk("sensor read from main %i \n", ret);
