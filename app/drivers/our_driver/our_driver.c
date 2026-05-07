@@ -1,9 +1,10 @@
-#include "zephyr/devicetree.h"
-#include "zephyr/drivers/gpio.h"
-#include "zephyr/logging/log_core.h"
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/logging/log_core.h>
 #include <zephyr/device.h>
-#include <zephyr/drivers/sensor.h>
 #include <zephyr/logging/log.h>
+
+#include <our_driver/our_driver.h>
 
 #define DT_DRV_COMPAT our_driver
 
@@ -11,35 +12,45 @@ struct our_driver_config {
     struct gpio_dt_spec led_gpios;
 };
 
+struct custom_driver_data_t {
+                  int blink_time_ms;
+                };
+
+
 LOG_MODULE_REGISTER(
     our_driver, LOG_LEVEL_INF); // Must register ONCE, Other files must call
                                 // LOG_MODULE_DECLARE(our_module, LOG_LEVEL_INF)
 
 
-int sample_fetch_my_impl(const struct device *dev, enum sensor_channel chan) {
+int set_blink_time_ms_impl(const struct device *dev, int time_ms) {
 
-  const struct our_driver_config *config = dev->config;
+  // const struct our_driver_config *config = dev->config;
+
+  struct custom_driver_data_t *data = dev->data; 
+
   //LOG_INF("sample_fetch_impl called for chan %d", chan);
   /* For homework l6-task1 it should turn off an LED on the board */
-  LOG_INF(" LED STATUS IS OFF");
-  gpio_pin_set_dt(&config->led_gpios, 0);
+  LOG_INF(" Setting blink_time_ms to %i", time_ms);
+  // gpio_pin_set_dt(&config->led_gpios, 0);
+  data->blink_time_ms = time_ms;
 
   return 42;
 }
 
+int get_blink_time_ms_impl(const struct device *dev) {
 
-int channel_get_my_impl(const struct device *dev, enum sensor_channel chan,
-                        struct sensor_value *val) {
+  // const struct our_driver_config *config = dev->config;
 
-  const struct our_driver_config *config = dev->config;                          
+  struct custom_driver_data_t *data = dev->data; 
 
-  //LOG_INF("channel_get_impl called for chan %d", chan);
-  /* For homework l6-task1 it should turn on an LED on the board */
-  LOG_INF(" LED STATUS IS ON");
-
-  gpio_pin_set_dt(&config->led_gpios, 1);
-  return 42;
+  //LOG_INF("sample_fetch_impl called for chan %d", chan);
+  /* For homework l6-task1 it should turn off an LED on the board */
+  LOG_INF(" Getting  blink_time_ms to %i", data->blink_time_ms);
+  // gpio_pin_set_dt(&config->led_gpios, 0);
+  
+  return data->blink_time_ms;
 }
+
 
 int init_function(const struct device *dev) {
 
@@ -60,11 +71,12 @@ int init_function(const struct device *dev) {
   return 0;
 }
 
-static DEVICE_API(sensor,
-                  api_led_driver) = {
-                    .channel_get = channel_get_my_impl,
-                    .sample_fetch = sample_fetch_my_impl
+struct custom_driver_api_t api_custom_driver = {
+                  .set_blink_time_ms = set_blink_time_ms_impl,
+                  .get_blink_time_ms = get_blink_time_ms_impl,
+                  
                 };
+
 
 /* This creates one instance of the driver, if more than one is enabled in the
  * DTS this line should be repeated for the following instance, the first
@@ -78,14 +90,18 @@ static DEVICE_API(sensor,
         .led_gpios = GPIO_DT_SPEC_INST_GET(inst, led_gpios)              \
     };                                                                   \
                                                                          \
+    static struct custom_driver_data_t our_driver_data_##inst = {        \
+        .blink_time_ms = 300,                                            \
+    };                                                                   \
+                                                                         \
     DEVICE_DT_INST_DEFINE(inst,                                          \
-        init_function,                                                   \
-        NULL,                                                            \
-        NULL,                                                            \
-        &our_driver_config_##inst,                                       \
-        POST_KERNEL,                                                     \
-        80,                                                              \
-        &api_led_driver);
+        init_function,    /* Init function */                            \
+        NULL,             /* Power management resources */               \
+        &our_driver_data_##inst,          /* Mutable data */             \
+        &our_driver_config_##inst,        /* Constant data */            \
+        POST_KERNEL,      /* Initialization level */                     \
+        80,               /* Device priority within this level */        \
+        &api_custom_driver);  /* Pointer to the API */
 
 DT_INST_FOREACH_STATUS_OKAY(
     DEV_INST) // It uses DT_DRV_COMPAT macro to filter the DTS searching for

@@ -5,6 +5,8 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
+#include <our_driver/our_driver.h>
+
 /* The devicetree node identifier for the "led0" alias. */
 // #define LED_NODE DT_ALIAS(status_led)
 
