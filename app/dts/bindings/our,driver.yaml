@@ -1,3 +1,11 @@
 description: Our simple GPIO driver
 compatible: "our,driver"
+
 include: base.yaml  # for status property
+
+properties:
+  led-gpios:
+    type: phandle-array    
+    description: |
+      gpio info for the led handled by the driver.
+
