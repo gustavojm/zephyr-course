@@ -69,7 +69,7 @@ int init_function(const struct device *dev) {
   return 0;
 }
 
-struct custom_driver_api_t api_custom_driver = {
+struct custom_driver_api api_custom_driver = {
     .set_blink_time_ms = set_blink_time_ms_impl,
     .get_blink_time_ms = get_blink_time_ms_impl,
 
