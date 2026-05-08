@@ -20,43 +20,19 @@ static const struct device *our_driver1 =
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 int main(void) {
-  struct sensor_value val;
-  // bool led_state = true;
-
-  // if (!gpio_is_ready_dt(&led)) return 0;
-
-  // if (gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE) < 0) return 0;
-  
+    
   if (!device_is_ready(our_driver0)) {
     return 0;
   }
 
+  auto time_ms = 100;
   while (1) {
+    time_ms += 100;
+    our_driver_set_blink_time_ms(our_driver0, time_ms);
+    
+    auto ret = our_driver_get_blink_time_ms(our_driver0);
 
-    auto ret = sensor_channel_get(our_driver0, SENSOR_CHAN_AMBIENT_TEMP, &val);
-
-    printk("sensor read from main %i \n", ret);
-    k_msleep(CONFIG_BLINK_SLEEP_TIME_MS);
-
-    ret = sensor_sample_fetch(our_driver0);
-    printk("sensor read from main sensor_1 %i \n", ret);
-
-    //     if (gpio_pin_toggle_dt(&led) < 0) return 0;
-
-    //     led_state = !led_state;
-    //     LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
-    k_msleep(CONFIG_BLINK_SLEEP_TIME_MS);
-
-
-    ret = sensor_channel_get(our_driver1, SENSOR_CHAN_AMBIENT_TEMP, &val);
-
-    printk("sensor read from main %i \n", ret);
-    k_msleep(CONFIG_BLINK_SLEEP_TIME_MS);
-
-    ret = sensor_sample_fetch(our_driver1);
-    printk("sensor read from main sensor_1 %i \n", ret);
-
-    k_msleep(CONFIG_BLINK_SLEEP_TIME_MS);
+    k_msleep(ret);
   
   }
   return 0;
