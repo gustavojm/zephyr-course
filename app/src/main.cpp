@@ -1,5 +1,5 @@
 // #include "syscalls/sensor.h"
-#include "zephyr/drivers/sensor.h"
+// #include "zephyr/drivers/sensor.h"
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
@@ -30,7 +30,7 @@ int main(void) {
     time_ms += 100;
     our_driver_set_blink_time_ms(our_driver0, time_ms);
     
-    auto ret = our_driver_get_blink_time_ms(our_driver0);
+    int ret = our_driver_get_blink_time_ms(our_driver0);
 
     k_msleep(ret);
   

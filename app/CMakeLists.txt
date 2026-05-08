@@ -5,3 +5,6 @@ project(my_zephyr_app)
 
 target_sources(app PRIVATE src/main.cpp)
 add_subdirectory(drivers/our_driver)
+
+zephyr_syscall_include_directories(include)
+zephyr_include_directories(include)
