@@ -5,7 +5,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/logging/log_core.h>
 
-#include <our_driver/our_driver.h>
+#include <app/drivers/our_driver.h>
 
 #define DT_DRV_COMPAT our_driver
 
