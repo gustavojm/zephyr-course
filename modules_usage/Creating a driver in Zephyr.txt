@@ -100,4 +100,32 @@ static DEVICE_API(sensor, api_led_driver) = {
 
 
 
+To include this module, the ZEPHYR_EXTRA_MODULES list should have an entry to the root of the source code of the module
 
+cmake_path(GET CMAKE_CURRENT_LIST_DIR PARENT_PATH MODULES_USAGE_ROOT)
+
+list(APPEND ZEPHYR_EXTRA_MODULES
+    ${MODULES_USAGE_ROOT}
+)
+
+if we want to use West to discover the module, we have to modify the west.yml to include 
+
+  projects:
+      - name: modules_usage
+      url: file:///home/gustavo/zephyr/zephyr-course/modules_usage
+      path: modules_usage
+      revision: main
+
+but in my case the manifest in use is the one located in the ~/zephyrproyect/west.yml so this is the one that should be modified.
+And as west cannot find directories above its current directory a symlink must be added
+
+~/zephyrproject
+drwxr-xr-x   8 1000 1000  4096 may 11 12:55 .
+drwxr-xr-x 104 1000 1000 12288 may 11 13:33 ..
+drwxr-xr-x   3 1000 1000  4096 sep 10  2024 bootloader
+drwxr-xr-x   9 1000 1000  4096 sep 11  2024 modules
+lrwxrwxrwx   1 1000 1000    48 may 11 12:55 modules_usage -> /home/gustavo/zephyr/zephyr-course/modules_usage   <-- this symlink
+drwxr-xr-x   4 1000 1000  4096 sep 10  2024 tools
+drwxr-xr-x   5 1000 1000  4096 sep 10  2024 .venv
+drwxr-xr-x   2 1000 1000  4096 sep 10  2024 .west
+drwxr-xr-x  28 1000 1000  4096 may 11 13:05 zephyr
