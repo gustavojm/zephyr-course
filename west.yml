@@ -1,5 +1,7 @@
 manifest:
   version: 1.0
+  self:
+    path: app
 
   projects:
     - name: zephyr

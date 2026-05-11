@@ -7,6 +7,8 @@ if (CONFIG_OUR_DRIVER)
 endif()
 
 
+# I cannot use zephyr_library() because I'm not creating a module, so use target_sources instead
+
 # if (CONFIG_OUR_DRIVER)
 # zephyr_library()
 # zephyr_syscall_header(${ZEPHYR_OUR_DRIVER_MODULE_DIR}/include/our_driver/our_driver.h)
