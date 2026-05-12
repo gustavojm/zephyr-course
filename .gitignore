@@ -5,10 +5,5 @@ build
 .west
 deps
 
-<<<<<<< HEAD
 # Clangd files
 .cache/
-=======
-#clangd files
-.cache
->>>>>>> 32b534c (commiting clear_core_M4)
