@@ -69,5 +69,3 @@ endif   #LED_SUBSYSTEM
 menu "Zephyr Settings"
     source "Kconfig.zephyr"
 endmenu
-
-rsource "drivers/our_driver/Kconfig"
