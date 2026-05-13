@@ -1,19 +1,12 @@
-// #include "syscalls/sensor.h"
-// #include "zephyr/drivers/sensor.h"
 #include <zephyr/device.h>
-#include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
 #include <drivers/our_driver/our_driver.h>
 
-/* The devicetree node identifier for the "led0" alias. */
-// #define LED_NODE DT_ALIAS(status_led)
-
-// static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
-
 static const struct device *our_driver0 =
     DEVICE_DT_GET(DT_NODELABEL(our_driver0));
+
 static const struct device *our_driver1 =
     DEVICE_DT_GET(DT_NODELABEL(our_driver1));
 
