@@ -33,7 +33,7 @@ int set_blink_time_ms_impl(const struct device *dev, int time_ms) {
   // gpio_pin_set_dt(&config->led_gpios, 0);
   data->blink_time_ms = time_ms;
 
-  return 42;
+  return 0;
 }
 
 int get_blink_time_ms_impl(const struct device *dev) {
@@ -69,10 +69,9 @@ int init_function(const struct device *dev) {
   return 0;
 }
 
-struct custom_driver_api api_custom_driver = {
+static DEVICE_API(custom, api_custom_driver) = {
     .set_blink_time_ms = set_blink_time_ms_impl,
     .get_blink_time_ms = get_blink_time_ms_impl,
-
 };
 
 /* This creates one instance of the driver, if more than one is enabled in the

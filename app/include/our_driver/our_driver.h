@@ -16,7 +16,7 @@ __subsystem struct custom_driver_api {
 __syscall  int our_driver_set_blink_time_ms(const struct device* dev, int time_ms);
 
 static inline int z_impl_our_driver_set_blink_time_ms(const struct device* dev, int time_ms) {
-  if (DEVICE_API_GET(custom, dev)->get_blink_time_ms != NULL) {
+  if (DEVICE_API_GET(custom, dev)->set_blink_time_ms == NULL) {
 		return -ENOSYS;
 	}
   return DEVICE_API_GET(custom, dev)->set_blink_time_ms(dev, time_ms);
@@ -26,7 +26,7 @@ static inline int z_impl_our_driver_set_blink_time_ms(const struct device* dev, 
 __syscall int our_driver_get_blink_time_ms(const struct device* dev);
 
 static inline int z_impl_our_driver_get_blink_time_ms(const struct device* dev) {
-  if (DEVICE_API_GET(custom, dev)->get_blink_time_ms != NULL) {
+  if (DEVICE_API_GET(custom, dev)->get_blink_time_ms == NULL) {
 		return -ENOSYS;
 	}
   return DEVICE_API_GET(custom, dev)->get_blink_time_ms(dev);
