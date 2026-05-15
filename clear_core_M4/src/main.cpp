@@ -1,7 +1,9 @@
-int main(void) {
-  
-  while (1) {
-  
-  }
-  return 0;
+#include <zephyr/kernel.h>
+
+int main(void)
+{
+    while (1) {
+        k_sleep(K_FOREVER);
+    }
+    return 0;
 }
