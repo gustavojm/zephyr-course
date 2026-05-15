@@ -1,0 +1,6 @@
+board:
+  name: our_board
+  full_name: Our Board based on Nucleo H755ZI-Q
+  vendor: st
+  socs:
+    - name: stm32h755xx
