@@ -13,7 +13,7 @@
 
 // static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
-static const struct device *our_driver0 =
+const struct device *our_driver0 =
     DEVICE_DT_GET(DT_NODELABEL(our_driver0));
 static const struct device *our_driver1 =
     DEVICE_DT_GET(DT_NODELABEL(our_driver1));
@@ -26,14 +26,13 @@ int main(void) {
     return 0;
   }
 
-  auto time_ms = 0;
   while (1) {
-    time_ms += 100;
-    our_driver_set_blink_time_ms(our_driver0, time_ms);
-    
-    int ret = our_driver_get_blink_time_ms(our_driver0);
+    static int ret = 0;
+    our_driver_set_blink_time_ms(our_driver0, ret);
     k_msleep(ret);
-  
+
+    ret = our_driver_get_blink_time_ms(our_driver0);
+    ret += 100;  
   }
   return 0;
 }
