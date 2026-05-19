@@ -7,3 +7,5 @@ deps
 
 #clangd files
 .cache
+
+twister-out*
