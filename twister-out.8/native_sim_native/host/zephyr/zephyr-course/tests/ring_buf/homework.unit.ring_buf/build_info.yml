@@ -1,0 +1,55 @@
+cmake:
+  application:
+    configuration-dir: '/home/gustavo/zephyr/zephyr-course/tests/ring_buf'
+    source-dir: '/home/gustavo/zephyr/zephyr-course/tests/ring_buf'
+  board:
+    name: 'native_sim'
+    path:
+     - '/home/gustavo/zephyrproject/zephyr/boards/native/native_sim'
+    qualifiers: 'native'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/gustavo/zephyrproject/zephyr/dts/bindings'
+    files:
+     - '/home/gustavo/zephyrproject/zephyr/boards/native/native_sim/native_sim.dts'
+    include-dirs:
+     - '/home/gustavo/zephyrproject/modules/hal/ambiq/dts'
+     - '/home/gustavo/zephyrproject/modules/hal/atmel/include'
+     - '/home/gustavo/zephyrproject/modules/hal/bouffalolab/include'
+     - '/home/gustavo/zephyrproject/modules/hal/bouffalolab/include/zephyr'
+     - '/home/gustavo/zephyrproject/modules/hal/gigadevice/include'
+     - '/home/gustavo/zephyrproject/modules/hal/microchip/include'
+     - '/home/gustavo/zephyrproject/modules/hal/microchip/dts'
+     - '/home/gustavo/zephyrproject/modules/hal/nuvoton/dts'
+     - '/home/gustavo/zephyrproject/modules/hal/nxp/dts'
+     - '/home/gustavo/zephyrproject/modules/hal/stm32/dts'
+     - '/home/gustavo/zephyrproject/modules/hal/ti/dts'
+     - '/home/gustavo/zephyrproject/zephyr/include'
+     - '/home/gustavo/zephyrproject/zephyr/include/zephyr'
+     - '/home/gustavo/zephyrproject/zephyr/dts/common'
+     - '/home/gustavo/zephyrproject/zephyr/dts/vendor'
+     - '/home/gustavo/zephyrproject/zephyr/dts/rx'
+     - '/home/gustavo/zephyrproject/zephyr/dts/x86'
+     - '/home/gustavo/zephyrproject/zephyr/dts/xtensa'
+     - '/home/gustavo/zephyrproject/zephyr/dts/sparc'
+     - '/home/gustavo/zephyrproject/zephyr/dts/riscv'
+     - '/home/gustavo/zephyrproject/zephyr/dts/posix'
+     - '/home/gustavo/zephyrproject/zephyr/dts/arm64'
+     - '/home/gustavo/zephyrproject/zephyr/dts/arm'
+     - '/home/gustavo/zephyrproject/zephyr/dts/arc'
+     - '/home/gustavo/zephyrproject/zephyr/dts'
+  kconfig:
+    files:
+     - '/home/gustavo/zephyrproject/zephyr/boards/native/native_sim/native_sim_defconfig'
+     - '/home/gustavo/zephyr/zephyr-course/tests/ring_buf/prj.conf'
+     - '/home/gustavo/zephyr/zephyr-course/twister-out/native_sim_native/host/zephyr/zephyr-course/tests/ring_buf/homework.unit.ring_buf/zephyr/misc/generated/extra_kconfig_options.conf'
+    user-files:
+     - '/home/gustavo/zephyr/zephyr-course/tests/ring_buf/prj.conf'
+  toolchain:
+    name: 'host'
+    path: ''
+  zephyr:
+    version: '4.3.0-rc3'
+    zephyr-base: '/home/gustavo/zephyrproject/zephyr'
+version: '0.1.0'

@@ -1,0 +1,51 @@
+2026-05-19 12:32:30,446 - twister - INFO - Using Ninja..
+2026-05-19 12:32:30,575 - twister - INFO - Zephyr version: v4.3.0-rc3-49-g8b032af664be
+2026-05-19 12:32:30,578 - twister - DEBUG - Running cmake script /home/gustavo/zephyrproject/zephyr/cmake/verify-toolchain.cmake
+2026-05-19 12:32:30,578 - twister - DEBUG - Calling cmake: /opt/st/stm32cubeclt_1.16.0/CMake/bin/cmake -DFORMAT=json -P /home/gustavo/zephyrproject/zephyr/cmake/verify-toolchain.cmake
+2026-05-19 12:32:30,808 - twister - DEBUG - Finished running /home/gustavo/zephyrproject/zephyr/cmake/verify-toolchain.cmake
+2026-05-19 12:32:30,808 - twister - INFO - Using 'zephyr' toolchain.
+2026-05-19 12:32:32,737 - twister - DEBUG - Reading testsuite configuration files under /home/gustavo/zephyr/zephyr-course/tests/ring_buf...
+2026-05-19 12:32:32,737 - twister - DEBUG - Found possible testsuite in /home/gustavo/zephyr/zephyr-course/tests/ring_buf
+2026-05-19 12:32:32,741 - twister - DEBUG - No duplicates found.
+2026-05-19 12:32:32,741 - twister - DEBUG -  platform filter: ['native_sim']
+2026-05-19 12:32:32,742 - twister - DEBUG - platform_pattern: []
+2026-05-19 12:32:32,742 - twister - DEBUG -    vendor filter: []
+2026-05-19 12:32:32,742 - twister - DEBUG -      arch_filter: None
+2026-05-19 12:32:32,742 - twister - DEBUG -       tag_filter: None
+2026-05-19 12:32:32,742 - twister - DEBUG -      exclude_tag: None
+2026-05-19 12:32:32,742 - twister - DEBUG - Checking platform filter: ['native_sim']
+2026-05-19 12:32:32,742 - twister - INFO - Building initial testsuite list...
+2026-05-19 12:32:32,743 - twister - INFO - Writing JSON report /home/gustavo/zephyr/zephyr-course/twister-out/testplan.json
+2026-05-19 12:32:32,760 - twister - INFO - JOBS: 4
+2026-05-19 12:32:32,760 - twister - INFO - Adding tasks to the queue...
+2026-05-19 12:32:32,760 - twister - DEBUG - adding native_sim/native/host/homework.unit.ring_buf
+2026-05-19 12:32:32,762 - twister - INFO - Added initial list of jobs to queue
+2026-05-19 12:32:32,768 - twister - DEBUG - Launched 4 jobs
+2026-05-19 12:32:32,773 - twister - DEBUG - Running cmake on /home/gustavo/zephyr/zephyr-course/tests/ring_buf for native_sim/native
+2026-05-19 12:32:32,774 - twister - DEBUG - Calling cmake: /opt/st/stm32cubeclt_1.16.0/CMake/bin/cmake -B/home/gustavo/zephyr/zephyr-course/twister-out/native_sim_native/host/zephyr/zephyr-course/tests/ring_buf/homework.unit.ring_buf -DTC_RUNID=d238d9c92929b5fa62e471b207909db2 -DTC_NAME=homework.unit.ring_buf -DCONFIG_COMPILER_WARNINGS_AS_ERRORS=y -DEXTRA_GEN_EDT_ARGS=--edtlib-Werror -GNinja -DPython3_EXECUTABLE=/home/gustavo/zephyrproject/.venv/bin/python -DZEPHYR_TOOLCHAIN_VARIANT=host -S/home/gustavo/zephyr/zephyr-course/tests/ring_buf -DBOARD=native_sim/native
+2026-05-19 12:32:39,892 - twister - DEBUG - Finished running cmake /home/gustavo/zephyr/zephyr-course/tests/ring_buf for native_sim/native in 7.12 seconds
+2026-05-19 12:32:39,895 - twister - DEBUG - build test: native_sim/native/host/homework.unit.ring_buf
+2026-05-19 12:32:39,895 - twister - DEBUG - Building /home/gustavo/zephyr/zephyr-course/tests/ring_buf for native_sim/native
+2026-05-19 12:32:39,896 - twister - DEBUG - Running /opt/st/stm32cubeclt_1.16.0/CMake/bin/cmake --build /home/gustavo/zephyr/zephyr-course/twister-out/native_sim_native/host/zephyr/zephyr-course/tests/ring_buf/homework.unit.ring_buf
+2026-05-19 12:32:40,838 - twister - ERROR - native_sim/native         homework.unit.ring_buf                             [31mERROR[39m: Build failure
+2026-05-19 12:32:40,838 - twister - ERROR - see: [33m/home/gustavo/zephyr/zephyr-course/twister-out/native_sim_native/host/zephyr/zephyr-course/tests/ring_buf/homework.unit.ring_buf/build.log[39m
+2026-05-19 12:32:40,844 - twister - INFO - 1 test scenarios (1 configurations) selected, 0 configurations filtered (0 by static filter, 0 at runtime).
+2026-05-19 12:32:40,850 - twister - INFO - [32m0 of 1[39m executed test configurations passed (0.00%), 0 built (not run), 0 failed, [31m1[39m errored, with no warnings in 10.40 seconds.
+2026-05-19 12:32:40,850 - twister - INFO - 0 of 8 executed test cases passed (0.00%), 8 blocked on 1 out of total 1259 platforms (0.08%).
+2026-05-19 12:32:40,850 - twister - INFO - [32m0[39m test configurations executed on platforms, [36m1[39m test configurations were only built.
+2026-05-19 12:32:40,850 - twister - INFO - Saving reports...
+2026-05-19 12:32:40,850 - twister - INFO - Writing JSON report /home/gustavo/zephyr/zephyr-course/twister-out/twister.json
+2026-05-19 12:32:40,852 - twister - INFO - Writing xunit report /home/gustavo/zephyr/zephyr-course/twister-out/twister.xml...
+2026-05-19 12:32:40,853 - twister - INFO - Writing xunit report /home/gustavo/zephyr/zephyr-course/twister-out/twister_report.xml...
+2026-05-19 12:32:40,855 - twister - INFO - -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+2026-05-19 12:32:40,855 - twister - INFO - The following issues were found (showing the top 10 items):
+2026-05-19 12:32:40,855 - twister - INFO - 1) homework.unit.ring_buf on native_sim/native error (Build failure - error: errno: No existe el fichero o el directorio)
+2026-05-19 12:32:40,856 - twister - INFO - 
+2026-05-19 12:32:40,856 - twister - INFO - To rerun the tests, call twister using the following commandline:
+2026-05-19 12:32:40,856 - twister - INFO - west twister -p <PLATFORM> -s <TEST ID>, for example:
+2026-05-19 12:32:40,856 - twister - INFO - 
+2026-05-19 12:32:40,856 - twister - INFO - west twister -p native_sim/native -s homework.unit.ring_buf
+2026-05-19 12:32:40,856 - twister - INFO - or with west:
+2026-05-19 12:32:40,856 - twister - INFO - west build -p -b native_sim/native tests/ring_buf -T homework.unit.ring_buf
+2026-05-19 12:32:40,856 - twister - INFO - -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+2026-05-19 12:32:40,856 - twister - INFO - Run completed

@@ -27,12 +27,13 @@ int main(void) {
   }
 
   while (1) {
-    static int ret = 0;
-    our_driver_set_blink_time_ms(our_driver0, ret);
-    k_msleep(ret);
+    // static int ret = 0;
+    // our_driver_set_blink_time_ms(our_driver0, ret);
+    // k_msleep(ret);
 
-    ret = our_driver_get_blink_time_ms(our_driver0);
-    ret += 100;  
+    // ret = our_driver_get_blink_time_ms(our_driver0);
+    // ret += 100;  
+    k_sleep(K_FOREVER);
   }
   return 0;
 }
