@@ -9,3 +9,4 @@ deps
 .cache
 
 twister-out*
+!twister-out/coverage
