@@ -1,4 +1,4 @@
-identifier: nucleo_h755zi_q/stm32h755xx/m7
+identifier: our_board
 name: ST Nucleo H755ZI-Q (M7)
 type: mcu
 arch: arm
