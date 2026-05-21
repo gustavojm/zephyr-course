@@ -1,0 +1,6 @@
+board:
+  name: our_picow_board
+  full_name: Our board from scratch based on Raspberry Pi Pico
+  vendor: ourself
+  socs:
+    - name: rp2040
